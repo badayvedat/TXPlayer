@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:TXPlayer/screens/videos_list_screen.dart';
 import 'package:flutter/material.dart';
 
 class FolderListTile extends StatelessWidget {
@@ -15,6 +16,10 @@ class FolderListTile extends StatelessWidget {
         size: 70,
       ),
       title: Text(dir.path.split('/').last),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (ctx) => VideosListScreen(dir.path)),
+      ),
     );
   }
 }
