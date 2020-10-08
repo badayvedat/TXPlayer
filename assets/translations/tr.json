@@ -1,0 +1,30 @@
+{
+    "appBar": {
+        "videos": "Videolar",
+        "refresh": "Yenile",
+        "search": "Ara",
+        "subtitleSettings": "Altyazı Ayarları",
+        "about": "About" 
+    },
+    "drawer": {
+        "darkTheme": "Karanlık Tema",
+        "languageSettings": "Dil Ayarları",
+        "subtitleSettings": "Altyazı Ayarları",
+        "about": "About"
+    },
+    "languageSettings": {
+        "alertDialogMessage": "Tercih Edilen Dilleri Ayarla",
+        "subtitle": "Altyazı",
+        "appLanguage": "Uygulama Dili"
+    },
+    "subtitleSettings": {
+        "size": "Boyut",
+        "color": "Renk",
+        "bold": "Koyu",
+        "shadow": "Gölge"
+    },
+    "videoPlayerInterface": {
+        "subtitle": "Altyazı",
+        "subtitleAlertDialogMessage": "Şu an açık olan altyazı dosyası:"
+    }
+}

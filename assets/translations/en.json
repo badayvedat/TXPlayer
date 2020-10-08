@@ -1,0 +1,30 @@
+{
+    "appBar": {
+        "videos": "Videos",
+        "refresh": "Refresh",
+        "search": "Search",
+        "subtitleSettings": "Subtitle Settings",
+        "about": "About" 
+    },
+    "drawer": {
+        "darkMode": "Dark Mode",
+        "languageSettings": "Language Settings",
+        "subtitleSettings": "Subtitle Settings",
+        "about": "About"
+    },
+    "languageSettings": {
+        "alertDialogMessage": "Set Preffered Languages",
+        "subtitle": "Subtitle",
+        "appLanguage": "App Language"
+    },
+    "subtitleSettings": {
+        "size": "Size",
+        "color": "Color",
+        "bold": "Bold",
+        "shadow": "Shadow"
+    },
+    "videoPlayerInterface": {
+        "subtitle": "Subtitle",
+        "subtitleAlertDialogMessage": "Currently Opened Subtitle File:"
+    }
+}
