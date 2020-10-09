@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:TXPlayer/widgets/folder_overview_list.dart';
 import 'package:flutter/material.dart';
 

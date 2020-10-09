@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:TXPlayer/screens/videos_list_screen.dart';
 import 'package:TXPlayer/widgets/folder_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
