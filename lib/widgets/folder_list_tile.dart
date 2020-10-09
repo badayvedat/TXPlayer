@@ -18,7 +18,10 @@ class FolderListTile extends StatelessWidget {
       title: Text(dir.path.split('/').last),
       onTap: () => Navigator.push(
         context,
-        MaterialPageRoute(builder: (ctx) => VideosListScreen(dir.path)),
+        PageRouteBuilder(
+          pageBuilder: (ctx, animation1, animation2) =>
+              VideosListScreen(dir.path),
+        ),
       ),
     );
   }
