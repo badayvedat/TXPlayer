@@ -11,11 +11,14 @@ class FolderOverviewList extends StatelessWidget {
 
   int getMediaFileCount(String path) {
     int count = 0;
-    Directory(path).listSync(recursive: true).forEach((entity) {
-      if (lookupMimeType(entity.path) == "video/mp4") {
-        count++;
-      }
-    });
+    // TODO replace this workaround with something more logical
+    try {
+      Directory(path).listSync(recursive: true).forEach((entity) {
+        if (lookupMimeType(entity.path) == "video/mp4") {
+          count++;
+        }
+      });
+    } catch (on) {}
     return count;
   }
 
