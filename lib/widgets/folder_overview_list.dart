@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:TXPlayer/widgets/video_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'package:TXPlayer/widgets/folder_list_tile.dart';
@@ -37,13 +38,39 @@ class FolderOverviewList extends StatelessWidget {
 
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           if (directories.isNotEmpty)
-            ...directories
-                .map((directory) => FolderListTile(
-                      Directory(directory),
-                    ))
-                .toList()
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+              child: Text(
+                "Folders",
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ...directories.map((directory) => FolderListTile(
+                Directory(directory),
+              )),
+          if (mediaFiles.isNotEmpty)
+            Container(
+              margin: directories.isEmpty
+                  ? EdgeInsets.symmetric(vertical: 4, horizontal: 10)
+                  : EdgeInsets.only(
+                      top: 25,
+                      bottom: 4,
+                      left: 10,
+                      right: 10,
+                    ),
+              child: Text(
+                "Videos",
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ...mediaFiles.map((filePath) => VideoListTile(filePath)),
         ],
       ),
     );
