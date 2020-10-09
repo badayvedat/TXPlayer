@@ -11,6 +11,7 @@ class FolderListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: EdgeInsetsDirectional.only(start: 9),
       leading: Icon(
         Icons.folder,
         size: 70,
