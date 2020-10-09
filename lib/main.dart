@@ -1,3 +1,4 @@
+import 'package:TXPlayer/screens/home_screen.dart';
 import 'package:TXPlayer/screens/videos_list_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: "/",
       routes: {
-        VideosListScreen.routeName: (context) => VideosListScreen(),
+        HomeScreen.routeName: (context) => HomeScreen(),
       },
     );
   }
