@@ -34,7 +34,7 @@ class VideoNavigationBar extends StatelessWidget {
               softWrap: true,
               style: TextStyle(
                 fontSize: MediaQuery.of(context).size.height * 0.050,
-                color: Colors.white70,
+                color: Colors.white,
               ),
             ),
           ),
