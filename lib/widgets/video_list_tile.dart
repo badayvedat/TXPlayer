@@ -1,3 +1,4 @@
+import 'package:TXPlayer/screens/video_screen.dart';
 import 'package:flutter/material.dart';
 
 class VideoListTile extends StatelessWidget {
@@ -15,7 +16,13 @@ class VideoListTile extends StatelessWidget {
       ),
       title: Text(path.split('/').last),
       // TODO implement onTap
-      onTap: () {},
+      onTap: () {
+        Navigator.pushReplacementNamed(
+          context,
+          VideoScreen.routeName,
+          arguments: path,
+        );
+      },
     );
   }
 }
