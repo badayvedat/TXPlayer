@@ -15,8 +15,12 @@ class FolderListTile extends StatelessWidget {
       leading: Icon(
         Icons.folder,
         size: 70,
+        color: Theme.of(context).iconTheme.color,
       ),
-      title: Text(dir.path.split('/').last),
+      title: Text(
+        dir.path.split('/').last,
+        style: Theme.of(context).textTheme.bodyText1,
+      ),
       onTap: () => Navigator.push(
         context,
         PageRouteBuilder(

@@ -14,7 +14,10 @@ class VideoListTile extends StatelessWidget {
         Icons.video_collection_rounded,
         size: 50,
       ),
-      title: Text(path.split('/').last),
+      title: Text(
+        path.split('/').last,
+        style: Theme.of(context).textTheme.bodyText1,
+      ),
       // TODO implement onTap
       onTap: () {
         Navigator.pushReplacementNamed(
