@@ -10,7 +10,7 @@ class VideoNavigationBar extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.15,
-      color: Colors.black12,
+      color: Colors.black45,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
