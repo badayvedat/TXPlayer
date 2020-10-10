@@ -1,4 +1,5 @@
 import 'package:TXPlayer/screens/home_screen.dart';
+import 'package:TXPlayer/screens/video_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
+        VideoScreen.routeName: (context) => VideoScreen(
+              mediaFilePath: ModalRoute.of(context).settings.arguments,
+            ),
       },
     );
   }
