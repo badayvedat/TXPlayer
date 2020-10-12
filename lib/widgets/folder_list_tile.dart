@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:TXPlayer/screens/videos_list_screen.dart';
+import 'package:TXPlayer/widgets/custom_tile.dart';
 import 'package:flutter/material.dart';
 
 class FolderListTile extends StatelessWidget {
@@ -10,14 +11,14 @@ class FolderListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: EdgeInsetsDirectional.only(start: 9),
-      leading: Icon(
+    var deviceWidth = MediaQuery.of(context).size.width;
+    return CustomTile(
+      icon: Icon(
         Icons.folder,
-        size: 70,
+        size: deviceWidth * 0.18,
         color: Theme.of(context).iconTheme.color,
       ),
-      title: Text(
+      trailingWidget: Text(
         dir.path.split('/').last,
         style: Theme.of(context).textTheme.bodyText1,
       ),
