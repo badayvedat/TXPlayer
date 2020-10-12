@@ -11,9 +11,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'TX Player',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+      theme: ThemeData.dark().copyWith(
+        appBarTheme: AppBarTheme(
+          color: Color.fromRGBO(28, 41, 57, 1),
+        ),
+        iconTheme: IconThemeData(color: Color.fromRGBO(68, 76, 86, 1)),
+        scaffoldBackgroundColor: Color.fromRGBO(22, 32, 42, 1),
+        textTheme: TextTheme(
+          bodyText1:
+              TextStyle(color: Color.fromRGBO(193, 199, 207, 1), fontSize: 17),
+          headline6: TextStyle(color: Color.fromRGBO(218, 221, 228, 1)),
+        ),
       ),
       initialRoute: "/",
       routes: {
