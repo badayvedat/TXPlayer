@@ -16,6 +16,11 @@ class _VideosListScreenState extends State<VideosListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.path.split('/').last),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_rounded),
+          onPressed: () => Navigator.pop(context),
+          splashRadius: Material.defaultSplashRadius * 2 / 3,
+        ),
       ),
       body: FolderOverviewList(widget.path),
     );
