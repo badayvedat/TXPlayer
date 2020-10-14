@@ -24,6 +24,8 @@ class _VideoScreenState extends State<VideoScreen> {
   bool isInitialized = false;
   bool isTapped = false;
   Timer timer;
+  bool _controllerWasPlaying = false;
+  bool _isDragging = false;
 
   @override
   void initState() {
@@ -44,6 +46,9 @@ class _VideoScreenState extends State<VideoScreen> {
     super.initState();
   }
 
+  String _formatDuration(Duration d) =>
+      d.toString().split('.').first.padLeft(8, "0");
+
   @override
   void dispose() {
     _controller.dispose();
@@ -63,6 +68,19 @@ class _VideoScreenState extends State<VideoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    void seekToRelativePosition(Offset globalPosition, double xDiff) {
+      final RenderBox box = context.findRenderObject();
+      final Offset tapPos = box.globalToLocal(globalPosition);
+      final double relative = tapPos.dx / box.size.width;
+      final Duration posDiff = _controller.value.duration * relative;
+      if (xDiff > 0) {
+        _controller.seekTo(_controller.value.position + posDiff * 0.01);
+      } else {
+        _controller.seekTo(_controller.value.position - posDiff * 0.01);
+      }
+      //_controller.seekTo(posDiff);
+    }
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: !isInitialized
@@ -72,30 +90,69 @@ class _VideoScreenState extends State<VideoScreen> {
           : Stack(
               children: <Widget>[
                 GestureDetector(
-                    child: Center(
-                      child: AspectRatio(
-                        aspectRatio: _controller.value.aspectRatio,
-                        child: VideoPlayer(_controller),
-                      ),
+                  child: Center(
+                    child: AspectRatio(
+                      aspectRatio: _controller.value.aspectRatio,
+                      child: VideoPlayer(_controller),
                     ),
-                    onTap: () {
-                      setState(() {
-                        // Timer will be used to sync dispose of VideoInterface and it's fade out animation
-                        if (isTapped) {
-                          isTapped = false;
-                          timer?.cancel();
-                        } else {
-                          isTapped = true;
-                          timer = Timer(Duration(milliseconds: 4500), () {
-                            if (isTapped) {
-                              setState(() {
-                                isTapped = false;
-                              });
-                            }
-                          });
-                        }
-                      });
-                    }),
+                  ),
+                  onTap: () {
+                    setState(() {
+                      // Timer will be used to sync dispose of VideoInterface and it's fade out animation
+                      if (isTapped) {
+                        isTapped = false;
+                        timer?.cancel();
+                      } else {
+                        isTapped = true;
+                        timer = Timer(Duration(milliseconds: 4500), () {
+                          if (isTapped) {
+                            setState(() {
+                              isTapped = false;
+                            });
+                          }
+                        });
+                      }
+                    });
+                  },
+                  onHorizontalDragStart: (DragStartDetails details) {
+                    if (!_controller.value.initialized) {
+                      return;
+                    }
+                    _controllerWasPlaying = _controller.value.isPlaying;
+                    if (_controllerWasPlaying) {
+                      _controller.pause();
+                    }
+                    setState(() {
+                      _isDragging = true;
+                    });
+                  },
+                  onHorizontalDragUpdate: (DragUpdateDetails details) {
+                    if (!_controller.value.initialized) {
+                      return;
+                    }
+                    seekToRelativePosition(
+                        details.globalPosition, details.primaryDelta);
+                    setState(() {});
+                  },
+                  onHorizontalDragEnd: (DragEndDetails details) {
+                    if (_controllerWasPlaying) {
+                      _controller.play();
+                    }
+                    setState(() {
+                      _isDragging = false;
+                    });
+                  },
+                ),
+                if (_isDragging)
+                  Center(
+                    child: Text(
+                      _formatDuration(_controller.value.position),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline2
+                          .copyWith(fontSize: 50),
+                    ),
+                  ),
                 if (isTapped)
                   VideoInterface(
                     videoName: widget.mediaFilePath.split('/').last,
