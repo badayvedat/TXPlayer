@@ -101,11 +101,6 @@ class _VideoScreenState extends State<VideoScreen> {
                     videoName: widget.mediaFilePath.split('/').last,
                     videoPlayerController: _controller,
                   ),
-                VideoProgressIndicator(
-                  _controller,
-                  allowScrubbing: true,
-                  padding: EdgeInsets.only(top: 10.0),
-                ),
               ],
             ),
     );

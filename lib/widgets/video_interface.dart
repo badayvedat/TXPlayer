@@ -20,9 +20,19 @@ class VideoInterface extends StatefulWidget {
 
 class _VideoInterfaceState extends State<VideoInterface>
     with TickerProviderStateMixin {
+  _VideoInterfaceState() {
+    _listener = () {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    };
+  }
+
   AnimationController _animationController;
   Animation<double> _animation;
   Timer _timer;
+  VoidCallback _listener;
 
   void _buildAnimations() {
     _animationController = AnimationController(
@@ -53,17 +63,65 @@ class _VideoInterfaceState extends State<VideoInterface>
     super.initState();
     _buildAnimations();
     _animationController.forward();
+    widget.videoPlayerController.addListener(_listener);
   }
+
+  String _formatDuration(Duration d) =>
+      d.toString().split('.').first.padLeft(8, "0");
 
   @override
   Widget build(BuildContext context) {
+    var deviceWidth = MediaQuery.of(context).size.width;
+    var deviceHeight = MediaQuery.of(context).size.height;
+
     return FadeTransition(
       opacity: _animation,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           VideoNavigationBar(widget.videoName),
-          VideoControlBar(widget.videoPlayerController),
+          Container(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(top: 5),
+                  height: deviceHeight * 0.055,
+                  width: deviceWidth,
+                  color: Colors.black45,
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        width: deviceWidth * 0.1,
+                        child: Text(
+                          _formatDuration(
+                              widget.videoPlayerController.value.position),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        width: deviceWidth * 0.8,
+                        child: VideoProgressIndicator(
+                          widget.videoPlayerController,
+                          allowScrubbing: true,
+                          colors: VideoProgressColors(playedColor: Colors.blue),
+                        ),
+                      ),
+                      Container(
+                        width: deviceWidth * 0.1,
+                        child: Text(
+                          _formatDuration(
+                              widget.videoPlayerController.value.duration),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                VideoControlBar(widget.videoPlayerController),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -71,6 +129,7 @@ class _VideoInterfaceState extends State<VideoInterface>
 
   @override
   void dispose() {
+    widget.videoPlayerController.removeListener(_listener);
     _animationController.dispose();
     _timer.cancel();
     super.dispose();
