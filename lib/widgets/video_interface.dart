@@ -20,29 +20,29 @@ class VideoInterface extends StatefulWidget {
 
 class _VideoInterfaceState extends State<VideoInterface>
     with TickerProviderStateMixin {
-  AnimationController _controller;
+  AnimationController _animationController;
   Animation<double> _animation;
   Timer _timer;
 
   void _buildAnimations() {
-    _controller = AnimationController(
+    _animationController = AnimationController(
       duration: Duration(milliseconds: 250),
       vsync: this,
     );
-    _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
-    _controller.forward();
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
+    _animationController.forward();
 
     // Fade out animation after some time
     _timer = Timer(
       Duration(milliseconds: 4000),
       () {
-        _controller = AnimationController(
+        _animationController = AnimationController(
           duration: Duration(milliseconds: 250),
           vsync: this,
         );
-        _animation = Tween(begin: 1.0, end: 0.0).animate(_controller);
+        _animation = Tween(begin: 1.0, end: 0.0).animate(_animationController);
         setState(() {
-          _controller.forward();
+          _animationController.forward();
         });
       },
     );
@@ -52,7 +52,7 @@ class _VideoInterfaceState extends State<VideoInterface>
   void initState() {
     super.initState();
     _buildAnimations();
-    _controller.forward();
+    _animationController.forward();
   }
 
   @override
@@ -71,7 +71,7 @@ class _VideoInterfaceState extends State<VideoInterface>
 
   @override
   void dispose() {
-    _controller.dispose();
+    _animationController.dispose();
     _timer.cancel();
     super.dispose();
   }
