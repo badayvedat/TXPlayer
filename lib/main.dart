@@ -1,5 +1,7 @@
+import 'package:TXPlayer/screens/about_screen.dart';
 import 'package:TXPlayer/screens/home_screen.dart';
 import 'package:TXPlayer/screens/video_screen.dart';
+import 'package:TXPlayer/shared/shared_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -11,6 +13,7 @@ void main() {
     ),
   );
   runApp(MyApp());
+  SharedManager.init();
 }
 
 class MyApp extends StatelessWidget {
@@ -46,6 +49,7 @@ class MyApp extends StatelessWidget {
         VideoScreen.routeName: (context) => VideoScreen(
               mediaFilePath: ModalRoute.of(context).settings.arguments,
             ),
+        AboutScreen.routeName: (context) => AboutScreen(),
       },
     );
   }

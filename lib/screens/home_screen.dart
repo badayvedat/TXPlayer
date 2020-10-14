@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:TXPlayer/widgets/folder_list_tile.dart';
+import 'package:TXPlayer/widgets/home_screen_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider_ex/path_provider_ex.dart';
@@ -59,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text("Videos"),
       ),
+      drawer: HomeScreenDrawer(),
       body: _isLoaded
           ? ListView(
               children: _directories
