@@ -31,24 +31,5 @@ class VideoListTile extends StatelessWidget {
         );
       },
     );
-
-    /* return ListTile(
-      contentPadding: EdgeInsetsDirectional.only(start: 9),
-      leading: Icon(
-        Icons.video_collection_rounded,
-        size: 50,
-      ),
-      title: Text(
-        path.split('/').last,
-        style: Theme.of(context).textTheme.bodyText1,
-      ),
-      onTap: () {
-        Navigator.pushReplacementNamed(
-          context,
-          VideoScreen.routeName,
-          arguments: path,
-        );
-      },
-    ); */
   }
 }
