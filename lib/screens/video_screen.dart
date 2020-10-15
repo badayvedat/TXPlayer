@@ -68,6 +68,8 @@ class _VideoScreenState extends State<VideoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => _onAfterBuild());
+
     void seekToRelativePosition(Offset globalPosition, double xDiff) {
       final RenderBox box = context.findRenderObject();
       final Offset tapPos = box.globalToLocal(globalPosition);
@@ -161,5 +163,14 @@ class _VideoScreenState extends State<VideoScreen> {
               ],
             ),
     );
+  }
+
+  void _onAfterBuild() {
+    if (_controller.value.position == _controller.value.duration &&
+        !_isDragging) {
+      Future.delayed(Duration(milliseconds: 500), () {
+        Navigator.of(context).pop();
+      });
+    }
   }
 }
